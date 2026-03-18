@@ -16,9 +16,9 @@
 
 <li><strong>Tienda:</strong> {{ $oferta->tienda }}</li>
 
-<li><strong>Precio original:</strong> {{ $oferta->precio_original }}</li>
+<li><strong>Precio Original:</strong> {{ $oferta->precio_original }}</li>
 
-<li><strong>Precio descuento:</strong> {{ $oferta->precio_descuento }}</li>
+<li><strong>Precio COn Descuento:</strong> {{ $oferta->precio_descuento }}</li>
 
 </ul>
 
