@@ -14,7 +14,7 @@
 
 <p>
 
-<a href="{{ route('ofertas.create') }}">Crear nueva oferta</a>
+<a href="{{ route('ofertas.create') }}">Crear una nueva oferta</a>
 
 </p>
 
