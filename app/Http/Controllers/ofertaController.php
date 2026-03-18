@@ -2,95 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contacto;
+use App\Models\Oferta;
 use Illuminate\Http\Request;
 
-class ofertaController extends Controller
+class OfertaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('contactos.contacto-index',)
-        ->with(['ofertas' => Oferta::all()
+        return view('ofertas.oferta-index')
+        ->with([
+            'ofertas' => Oferta::all()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('contactos.contacto-create');
+        return view('ofertas.oferta-create');
     }
-//metos de edit update y destroy//
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $request->validate([
-        'nombre' => 'required',
-        'email' => 'required|email',
-        'mensaje' => 'required|min:10' ]);   
+            'titulo' => 'required',
+            'vigencia' => 'required|date',
+            'tienda' => 'required',
+            'precio_original' => 'required|numeric',
+            'precio_descuento' => 'required|numeric'
+        ]);
 
-        $contacto = new Contacto();
-        $contacto->nombre = $request->nombre;   
-        $contacto->email = $request->email; 
-        $contacto->mensaje = $request->mensaje;
-        $contacto->save();
+        $oferta = new Oferta();
+        $oferta->titulo = $request->titulo;
+        $oferta->vigencia = $request->vigencia;
+        $oferta->tienda = $request->tienda;
+        $oferta->precio_original = $request->precio_original;
+        $oferta->precio_descuento = $request->precio_descuento;
+        $oferta->save();
 
-        return redirect()->route('contactos.index');
-            }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Contacto $contacto)
-    {
-        return view ('contactos.contacto-show')
-        ->with([
-            'contacto' => $contacto
-            ]);
+        return redirect()->route('ofertas.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Contacto $contacto)
+    public function show(Oferta $oferta)
     {
-        return view('contactos.contacto-edit')
+        return view('ofertas.oferta-show')
         ->with([
-            'contacto' => $contacto
-            ]);
+            'oferta' => $oferta
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Contacto $contacto)
+    public function edit(Oferta $oferta)
+    {
+        return view('ofertas.oferta-edit')
+        ->with([
+            'oferta' => $oferta
+        ]);
+    }
+
+    public function update(Request $request, Oferta $oferta)
     {
         $request->validate([
-            'nombre' => 'required',
-            'email' => 'required|email',
-            'mensaje' => 'required|min:10'
-            ]);   
+            'titulo' => 'required',
+            'vigencia' => 'required|date',
+            'tienda' => 'required',
+            'precio_original' => 'required|numeric',
+            'precio_descuento' => 'required|numeric'
+        ]);
 
-            $contacto->nombre = $request->nombre;   
-            $contacto->email = $request->email; 
-            $contacto->mensaje = $request->mensaje;
-            $contacto->save();
-    
-            return redirect()->route('contactos.show', $contacto);
+        $oferta->titulo = $request->titulo;
+        $oferta->vigencia = $request->vigencia;
+        $oferta->tienda = $request->tienda;
+        $oferta->precio_original = $request->precio_original;
+        $oferta->precio_descuento = $request->precio_descuento;
+        $oferta->save();
+
+        return redirect()->route('ofertas.show', $oferta);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Contacto $contacto)
+    public function destroy(Oferta $oferta)
     {
-        $contacto->delete();
-        return redirect()->route('contactos.index');
+        $oferta->delete();
+        return redirect()->route('ofertas.index');
     }
 }
